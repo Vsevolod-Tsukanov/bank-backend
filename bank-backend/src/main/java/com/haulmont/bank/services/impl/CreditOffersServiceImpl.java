@@ -59,7 +59,7 @@ public class CreditOffersServiceImpl implements CreditOffersService {
             throw new EntityNotFoundException("Client value is empty");
         }
 
-        Optional<CreditDetails> creditDetailsOptional = creditDetailsRepository.findById(request.getCreditDetailsId());
+        Optional<CreditDetails> creditDetailsOptional = creditDetailsRepository.findById(request.getCreditId());
 
         if (creditDetailsOptional.isEmpty()) {
             throw new EntityNotFoundException("Credit details value is empty");
@@ -97,7 +97,7 @@ public class CreditOffersServiceImpl implements CreditOffersService {
             throw new EntityNotFoundException("Client value is empty");
         }
 
-        Optional<CreditDetails> creditDetailsOptional = creditDetailsRepository.findById(request.getCreditDetailsId());
+        Optional<CreditDetails> creditDetailsOptional = creditDetailsRepository.findById(request.getCreditId());
 
         if (creditDetailsOptional.isEmpty()) {
             throw new EntityNotFoundException("Credit details value is empty");
@@ -119,7 +119,7 @@ public class CreditOffersServiceImpl implements CreditOffersService {
 
 
         creditOffersRepository.save(entity);
-        log.info("Credit Offer {} has been created or updated", entity.getId());
+        log.info("Credit Offer {} has been created", entity.getId());
 
         return entity;
     }
@@ -140,7 +140,7 @@ public class CreditOffersServiceImpl implements CreditOffersService {
 
         BigDecimal sumOfPrincipal = request.getSumOfCredit();
 
-        BigDecimal percents = creditDetailsRepository.getById(request.getCreditDetailsId()).getCreditPercent();
+        BigDecimal percents = creditDetailsRepository.getById(request.getCreditId()).getCreditPercent();
         BigDecimal sumOfPercent = sumOfPrincipal.multiply(percents.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_EVEN));
 
         BigDecimal sumOfPayment = sumOfPrincipal.add(sumOfPercent);

@@ -15,7 +15,7 @@ import java.util.UUID;
 public abstract class AbstractCreditOfferRequest {
 
     private UUID clientId;
-    private UUID creditDetailsId;
+    private UUID creditId;
     private BigDecimal sumOfCredit;
     private Integer monthsOfCredit;
 }
