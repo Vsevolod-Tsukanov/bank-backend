@@ -144,7 +144,7 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         BigDecimal sumOfPercent = sumOfPrincipal.multiply(percents.divide(BigDecimal.valueOf(100), 2, RoundingMode.HALF_EVEN));
 
         BigDecimal sumOfPayment = sumOfPrincipal.add(sumOfPercent);
-        BigDecimal monthlyPayment = sumOfPayment.divide(BigDecimal.valueOf(request.getMonthsOfCredit()));
+        BigDecimal monthlyPayment = sumOfPayment.divide(BigDecimal.valueOf(request.getMonthsOfCredit()), 2, RoundingMode.HALF_EVEN);
 
         Date firstPayment = DateUtils.addMonths(new Date(), 1);
         Date lastPayment = DateUtils.addMonths(firstPayment, request.getMonthsOfCredit() - 1);

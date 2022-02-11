@@ -15,7 +15,7 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(value = "offers", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "/offers", produces = MediaType.APPLICATION_JSON_VALUE)
 @RequiredArgsConstructor
 public class CreditOfferController {
 
