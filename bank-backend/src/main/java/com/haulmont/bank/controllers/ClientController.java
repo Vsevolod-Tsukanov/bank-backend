@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
@@ -37,12 +38,12 @@ public class ClientController {
 
     @ResponseStatus(HttpStatus.CREATED)
     @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClientResponse createClient(@RequestBody ClientRequestWithoutId request) {
+    public ClientResponse createClient(@RequestBody @Valid ClientRequestWithoutId request) {
         return ClientResponse.convertToResponse(clientService.createClient(request));
     }
 
     @PutMapping(consumes = MediaType.APPLICATION_JSON_VALUE)
-    public ClientResponse updateClient(@RequestBody ClientRequest request) {
+    public ClientResponse updateClient(@RequestBody @Valid ClientRequest request) {
         return ClientResponse.convertToResponse(clientService.updateClient(request));
     }
 
