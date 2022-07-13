@@ -83,7 +83,6 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         schedule.setSumOfMonthlyPayment(generatedSchedule.getSumOfMonthlyPayment());
         schedule.setSumOfPercent(generatedSchedule.getSumOfPercent());
         schedule.setSumOfPrincipal(generatedSchedule.getSumOfPrincipal());
-//        schedule.setId(request.getPaymentScheduleId());
 
         entity.setClient(clientOptional.get());
         entity.setCreditDetails(creditDetailsOptional.get());
@@ -97,7 +96,6 @@ public class CreditOffersServiceImpl implements CreditOffersService {
             throw new OverLimitException("Over Credit Limit");
         }
 
-//        paymentScheduleRepository.save(schedule);
         creditOffersRepository.save(entity);
         log.info("Credit Offer {} has been created or updated", entity.getId());
 
@@ -173,7 +171,6 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         schedule.setDateOfFirstPayment(firstPayment);
         schedule.setDateOfLastPayment(lastPayment);
 
-//        paymentScheduleRepository.save(schedule);
         System.out.println("a");
         return schedule;
     }
