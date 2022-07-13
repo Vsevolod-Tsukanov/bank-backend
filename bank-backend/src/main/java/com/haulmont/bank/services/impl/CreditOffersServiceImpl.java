@@ -171,7 +171,6 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         schedule.setDateOfFirstPayment(firstPayment);
         schedule.setDateOfLastPayment(lastPayment);
 
-        System.out.println("a");
         return schedule;
     }
 
