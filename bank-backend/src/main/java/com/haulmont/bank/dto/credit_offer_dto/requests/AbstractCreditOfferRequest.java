@@ -16,6 +16,7 @@ public abstract class AbstractCreditOfferRequest {
 
     private UUID clientId;
     private UUID creditId;
+    private UUID paymentScheduleId;
     private BigDecimal sumOfCredit;
     private Integer monthsOfCredit;
 }

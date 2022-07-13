@@ -60,27 +60,44 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         }
 
         Optional<CreditDetails> creditDetailsOptional = creditDetailsRepository.findById(request.getCreditId());
+        PaymentSchedule schedule = paymentScheduleRepository.findById(request.getPaymentScheduleId())
+                .orElseThrow(() -> new EntityNotFoundException("Cannot find Payment Schedule by id"));
+
 
         if (creditDetailsOptional.isEmpty()) {
-            throw new EntityNotFoundException("Credit details value is empty");
+            throw new EntityNotFoundException("Credit Details value is empty");
         }
 
 
         CreditOffer entity;
 
+        PaymentSchedule generatedSchedule = generatePaymentSchedule(request);
+
+
         entity = creditOffersRepository.findById(request.getId())
                 .orElseThrow(() -> new EntityNotFoundException("Cannot find credit offer by id"));
+
+        schedule.setDateOfFirstPayment(generatedSchedule.getDateOfFirstPayment());
+        schedule.setDateOfLastPayment(generatedSchedule.getDateOfLastPayment());
+        schedule.setSumOfPayment(generatedSchedule.getSumOfPayment());
+        schedule.setSumOfMonthlyPayment(generatedSchedule.getSumOfMonthlyPayment());
+        schedule.setSumOfPercent(generatedSchedule.getSumOfPercent());
+        schedule.setSumOfPrincipal(generatedSchedule.getSumOfPrincipal());
+//        schedule.setId(request.getPaymentScheduleId());
 
         entity.setClient(clientOptional.get());
         entity.setCreditDetails(creditDetailsOptional.get());
         entity.setMonthsOfCredit(request.getMonthsOfCredit());
-        entity.setPaymentSchedule(generatePaymentSchedule(request));
+        entity.setPaymentSchedule(schedule);
         entity.setSumOfCredit(request.getSumOfCredit());
+
+        schedule.setCreditOffer(entity);
 
         if (isCreditLimitExceeded(request, entity)) {
             throw new OverLimitException("Over Credit Limit");
         }
 
+//        paymentScheduleRepository.save(schedule);
         creditOffersRepository.save(entity);
         log.info("Credit Offer {} has been created or updated", entity.getId());
 
@@ -156,7 +173,8 @@ public class CreditOffersServiceImpl implements CreditOffersService {
         schedule.setDateOfFirstPayment(firstPayment);
         schedule.setDateOfLastPayment(lastPayment);
 
-        paymentScheduleRepository.save(schedule);
+//        paymentScheduleRepository.save(schedule);
+        System.out.println("a");
         return schedule;
     }
 

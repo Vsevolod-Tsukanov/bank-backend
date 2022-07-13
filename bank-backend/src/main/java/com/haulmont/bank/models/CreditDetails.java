@@ -16,22 +16,18 @@ import java.util.UUID;
 @NoArgsConstructor
 public class CreditDetails {
 
+    @OneToMany(cascade = CascadeType.ALL,
+            mappedBy = "creditDetails")
+    List<CreditOffer> creditOffers;
     @Id
     @Column(name = "credit_details_id")
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
-
     @Column(name = "credit_limit")
     private BigDecimal creditLimit;
-
     @Column(name = "credit_percent")
     private BigDecimal creditPercent;
-
     @ManyToOne(targetEntity = Bank.class, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinColumn(name = "bank_id")
     private Bank bank;
-
-    @OneToMany(cascade = CascadeType.ALL,
-            mappedBy = "creditDetails")
-    List<CreditOffer> creditOffers;
 }

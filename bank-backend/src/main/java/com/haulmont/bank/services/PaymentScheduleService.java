@@ -11,5 +11,7 @@ public interface PaymentScheduleService {
     Optional<PaymentSchedule> getPaymentSchedule(UUID id);
 
     List<PaymentSchedule> getAllPaymentSchedules();
+
+
 }
 

@@ -42,4 +42,5 @@ public class PaymentSchedule {
     @OneToOne(targetEntity = CreditOffer.class, cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, mappedBy = "paymentSchedule")
     private CreditOffer creditOffer;
 
+
 }

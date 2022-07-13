@@ -27,4 +27,5 @@ public class PaymentScheduleServiceImpl implements PaymentScheduleService {
     public List<PaymentSchedule> getAllPaymentSchedules() {
         return paymentScheduleRepository.findAll();
     }
+
 }

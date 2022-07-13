@@ -37,4 +37,6 @@ public class CreditOffer {
     @OneToOne(targetEntity = PaymentSchedule.class, cascade = CascadeType.ALL)
     @JoinColumn(name = "payment_schedule_id")
     private PaymentSchedule paymentSchedule;
+
+
 }
